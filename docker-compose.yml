@@ -1,0 +1,192 @@
+services:
+
+  postgres:
+    image: postgres:17
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: "DemoDb"
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "JayK@123!"
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U postgres -d DemoDb"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+    networks:
+      - sentinelai
+
+
+  neo4j:
+    image: neo4j:5-community
+
+    restart: unless-stopped
+
+    environment:
+      NEO4J_AUTH: "neo4j/JayK@123!"
+
+    ports:
+      - "7474:7474"
+      - "7687:7687"
+
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "cypher-shell -u neo4j -p 'JayK@123!' 'RETURN 1' > /dev/null 2>&1"
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+    networks:
+      - sentinelai
+
+
+  ai:
+    build:
+      context: .
+      dockerfile: ai/Dockerfile
+
+    restart: unless-stopped
+
+    environment:
+
+      SENTINELAI_POSTGRES_HOST: "postgres"
+      SENTINELAI_POSTGRES_PORT: "5432"
+      SENTINELAI_POSTGRES_DB: "DemoDb"
+      SENTINELAI_POSTGRES_USER: "postgres"
+      SENTINELAI_POSTGRES_PASSWORD: "JayK@123!"
+
+      SENTINELAI_NEO4J_URI: "bolt://neo4j:7687"
+      SENTINELAI_NEO4J_USERNAME: "neo4j"
+      SENTINELAI_NEO4J_PASSWORD: "JayK@123!"
+      SENTINELAI_NEO4J_DATABASE: "neo4j"
+
+      SENTINELAI_EXTERNAL_TOOLS_ENABLED: "true"
+      SENTINELAI_AI_ENABLED: "${SENTINELAI_AI_ENABLED:-true}"
+      SENTINELAI_AI_PRIMARY_PROVIDER: "${SENTINELAI_AI_PRIMARY_PROVIDER:-gemini}"
+      SENTINELAI_AI_FALLBACK_PROVIDERS: "${SENTINELAI_AI_FALLBACK_PROVIDERS:-gemini,groq}"
+      GEMINI_API_KEY: "${GEMINI_API_KEY:-}"
+      GEMINI_API_KEY_2: "${GEMINI_API_KEY_2:-}"
+      SENTINELAI_GEMINI_MODEL: "${SENTINELAI_GEMINI_MODEL:-gemini-2.5-flash-lite}"
+      SENTINELAI_GEMINI_FALLBACK_MODEL: "${SENTINELAI_GEMINI_FALLBACK_MODEL:-gemini-2.5-flash}"
+      GROQ_API_KEY: "${GROQ_API_KEY:-}"
+      SENTINELAI_GROQ_MODEL: "${SENTINELAI_GROQ_MODEL:-openai/gpt-oss-120b}"
+      GITHUB_TOKEN: "${GITHUB_TOKEN:-}"
+      GITHUB_API_URL: "${GITHUB_API_URL:-https://api.github.com}"
+      GITHUB_OAUTH_CLIENT_ID: "${GITHUB_OAUTH_CLIENT_ID:-}"
+      GITHUB_OAUTH_CLIENT_SECRET: "${GITHUB_OAUTH_CLIENT_SECRET:-}"
+      GITHUB_OAUTH_REDIRECT_URI: "${GITHUB_OAUTH_REDIRECT_URI:-http://localhost:8000/ui/auth/callback}"
+      SENTINELAI_COOKIE_SECURE: "${SENTINELAI_COOKIE_SECURE:-false}"
+      SENTINELAI_COOKIE_SAMESITE: "${SENTINELAI_COOKIE_SAMESITE:-lax}"
+      SENTINELAI_FRONTEND_ORIGINS: "${SENTINELAI_FRONTEND_ORIGINS:-http://localhost:5173}"
+
+    ports:
+      - "8000:8000"
+
+    depends_on:
+
+      postgres:
+        condition: service_healthy
+
+      neo4j:
+        condition: service_healthy
+
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health', timeout=5)"
+        ]
+      interval: 15s
+      timeout: 10s
+      retries: 10
+
+    networks:
+      - sentinelai
+
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+
+    restart: unless-stopped
+
+    environment:
+
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/DemoDb"
+      SPRING_DATASOURCE_USERNAME: "postgres"
+      SPRING_DATASOURCE_PASSWORD: "JayK@123!"
+
+      SENTINELAI_AI_BASE_URL: "http://ai:8000"
+
+      SENTINELAI_NEO4J_URI: "bolt://neo4j:7687"
+      SENTINELAI_NEO4J_USERNAME: "neo4j"
+      SENTINELAI_NEO4J_PASSWORD: "JayK@123!"
+      SENTINELAI_NEO4J_DATABASE: "neo4j"
+
+      SERVER_PORT: "8080"
+
+    ports:
+      - "8080:8080"
+
+    depends_on:
+
+      postgres:
+        condition: service_healthy
+
+      neo4j:
+        condition: service_healthy
+
+      ai:
+        condition: service_healthy
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -fsS http://localhost:8080/api/infrastructure/health > /dev/null"
+        ]
+      interval: 15s
+      timeout: 10s
+      start_period: 45s
+      retries: 10
+
+    networks:
+      - sentinelai
+
+
+volumes:
+
+  postgres_data:
+
+  neo4j_data:
+
+  neo4j_logs:
+
+
+networks:
+
+  sentinelai:
+    driver: bridge

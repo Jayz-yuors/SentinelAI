@@ -1,0 +1,272 @@
+{
+  "project": "SentinelAI",
+  "generated_at": "2026-08-17T21:11:24+05:30",
+  "project_root": "C:\\Users\\Shruti\\jk\\Python\\Python_GUI\\Project_series\\11.SentiNelAI",
+  "structural_progress_percent": 15.8,
+  "warning": "This percentage is structural evidence only. A milestone must be functionally tested before calling it truly complete.",
+  "file_counts": {
+    "source_directories": 31,
+    "source_files": 22
+  },
+  "git": {
+    "is_git_repo": true,
+    "branch": "main",
+    "commit_count": null,
+    "last_commit": null,
+    "status": "changes present"
+  },
+  "milestones": [
+    {
+      "id": "M01",
+      "name": "Project and Git foundation",
+      "area": "Foundation",
+      "status": "COMPLETE",
+      "checks_passed": 2,
+      "checks_total": 2,
+      "checks": [
+        "README.md",
+        ".git"
+      ]
+    },
+    {
+      "id": "M02",
+      "name": "Spring Boot backend foundation",
+      "area": "Backend",
+      "status": "COMPLETE",
+      "checks_passed": 3,
+      "checks_total": 3,
+      "checks": [
+        "backend/pom.xml",
+        "backend/src/main/java/com/sentinelai/backend/BackendApplication.java",
+        "backend/src/main/resources/application.yaml"
+      ]
+    },
+    {
+      "id": "M03",
+      "name": "Backend common infrastructure",
+      "area": "Backend",
+      "status": "COMPLETE",
+      "checks_passed": 3,
+      "checks_total": 3,
+      "checks": [
+        "backend/src/main/java/com/sentinelai/backend/common/config/CorsConfig.java",
+        "backend/src/main/java/com/sentinelai/backend/common/constants/AppConstants.java",
+        "backend/src/main/java/com/sentinelai/backend/common/exception/GlobalExceptionHandler.java"
+      ]
+    },
+    {
+      "id": "M04",
+      "name": "Repository integration",
+      "area": "Core",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "backend/src/main/java/com/sentinelai/backend/repository",
+        "ai/analyzer/repository"
+      ]
+    },
+    {
+      "id": "M05",
+      "name": "AI API",
+      "area": "AI",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "ai/requirements.txt",
+        "ai/api/main.py"
+      ]
+    },
+    {
+      "id": "M06",
+      "name": "Repository/code/change analysis",
+      "area": "AI",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 3,
+      "checks": [
+        "ai/analyzer/repository",
+        "ai/analyzer/code",
+        "ai/analyzer/change"
+      ]
+    },
+    {
+      "id": "M07",
+      "name": "Dependency intelligence",
+      "area": "AI",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "ai/dependency/extractor",
+        "ai/dependency/graph"
+      ]
+    },
+    {
+      "id": "M08",
+      "name": "Security intelligence",
+      "area": "Security",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "ai/security",
+        "security"
+      ]
+    },
+    {
+      "id": "M09",
+      "name": "ML risk prediction",
+      "area": "AI/ML",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 3,
+      "checks": [
+        "ai/prediction",
+        "ai/models",
+        "ai/data"
+      ]
+    },
+    {
+      "id": "M10",
+      "name": "AI decision engine",
+      "area": "AI",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 3,
+      "checks": [
+        "ai/decision/rules",
+        "ai/decision/scoring",
+        "ai/decision/engine"
+      ]
+    },
+    {
+      "id": "M11",
+      "name": "Adaptive testing",
+      "area": "CI/CD",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "ai/testing/selector",
+        "ai/testing/prioritizer"
+      ]
+    },
+    {
+      "id": "M12",
+      "name": "CI/CD execution layer",
+      "area": "CI/CD",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 5,
+      "checks": [
+        "pipeline/github/workflows",
+        "pipeline/scripts/build",
+        "pipeline/scripts/test",
+        "pipeline/scripts/security",
+        "pipeline/scripts/deploy"
+      ]
+    },
+    {
+      "id": "M13",
+      "name": "Database infrastructure",
+      "area": "Infrastructure",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 3,
+      "checks": [
+        "database/postgres",
+        "database/neo4j",
+        "database/redis"
+      ]
+    },
+    {
+      "id": "M14",
+      "name": "Containerization and deployment",
+      "area": "Deployment",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 4,
+      "checks": [
+        "deployment/docker",
+        "deployment/compose/docker-compose.yml",
+        "deployment/kubernetes",
+        "deployment/helm"
+      ]
+    },
+    {
+      "id": "M15",
+      "name": "Monitoring and observability",
+      "area": "Monitoring",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 5,
+      "checks": [
+        "monitoring/prometheus",
+        "monitoring/grafana",
+        "monitoring/loki",
+        "monitoring/jaeger",
+        "monitoring/opentelemetry"
+      ]
+    },
+    {
+      "id": "M16",
+      "name": "Frontend dashboard",
+      "area": "Frontend",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 2,
+      "checks": [
+        "frontend/package.json",
+        "frontend/src"
+      ]
+    },
+    {
+      "id": "M17",
+      "name": "System testing",
+      "area": "Testing",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 5,
+      "checks": [
+        "tests/integration",
+        "tests/e2e",
+        "tests/pipeline",
+        "tests/security",
+        "tests/performance"
+      ]
+    },
+    {
+      "id": "M18",
+      "name": "Learning/feedback engine",
+      "area": "AI/ML",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 3,
+      "checks": [
+        "ai/learning/training",
+        "ai/learning/feedback",
+        "ai/learning/evaluation"
+      ]
+    },
+    {
+      "id": "M19",
+      "name": "Documentation",
+      "area": "Documentation",
+      "status": "NOT_STARTED",
+      "checks_passed": 0,
+      "checks_total": 7,
+      "checks": [
+        "docs/architecture",
+        "docs/api",
+        "docs/ai",
+        "docs/security",
+        "docs/deployment",
+        "docs/research",
+        "docs/setup"
+      ]
+    }
+  ],
+  "tree_file": "SENTINELAI_TREE.txt"
+}

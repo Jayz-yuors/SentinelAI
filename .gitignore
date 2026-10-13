@@ -1,0 +1,110 @@
+# ============================================================
+# SECRETS
+# ============================================================
+
+.env
+.env.*
+!.env.example
+
+# ============================================================
+# PYTHON
+# ============================================================
+
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+.venv/
+venv/
+env/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ============================================================
+# IDE
+# ============================================================
+
+.vscode/
+.idea/
+
+# ============================================================
+# BUILD
+# ============================================================
+
+target/
+build/
+dist/
+*.egg-info/
+
+# ============================================================
+# NODE
+# ============================================================
+
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/.env
+
+# ============================================================
+# SENTINELAI RUNTIME
+# ============================================================
+
+tmp/
+temp/
+logs/
+reports/
+artifacts/
+artifacts/ui-uploads/
+
+*.log
+
+# ==========================================
+# SentinelAI - Secrets and local environment
+# ==========================================
+.env
+.env.*
+**/.env
+**/.env.*
+!.env.example
+!.env.*.example
+!**/.env.example
+!**/.env.*.example
+
+# Local credentials and private keys
+secrets/
+**/secrets/
+credentials/
+**/credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+*.keystore
+*.jks
+service-account*.json
+credentials*.json
+*secret*.json
+
+# Python generated files and environments
+__pycache__/
+**/__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+
+# Java and frontend generated files
+**/target/
+**/node_modules/
+**/tsconfig.tsbuildinfo
+
+# Generated SentinelAI output - keep the source code
+artifacts/
+.sentinelai/reports/
+
+# Local archives and temporary output
+backend.zip
+*.log

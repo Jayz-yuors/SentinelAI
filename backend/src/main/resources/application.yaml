@@ -1,0 +1,30 @@
+spring:
+  application:
+    name: sentinelai-backend
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/DemoDb
+    username: postgres
+    password: 'JayK@123!'
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+
+sentinelai:
+  ai:
+    base-url: http://localhost:8001
+
+  neo4j:
+    uri: bolt://localhost:7687
+    username: neo4j
+    password: 'JayK@123!'
+    database: neo4j
+
+server:
+  port: 8081
